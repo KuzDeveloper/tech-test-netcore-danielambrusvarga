@@ -16,25 +16,32 @@ namespace Todo.Controllers
     {
         private readonly ApplicationDbContext dbContext;
         private readonly IUserStore<IdentityUser> userStore;
+        private readonly TodoListDetailViewmodelFactory _todoListDetailViewmodelFactory;
+        private readonly TodoListIndexViewmodelFactory _todoListIndexViewmodelFactory;
 
-        public TodoListController(ApplicationDbContext dbContext, IUserStore<IdentityUser> userStore)
+        public TodoListController(ApplicationDbContext dbContext,
+            IUserStore<IdentityUser> userStore,
+            TodoListDetailViewmodelFactory todoListDetailViewmodelFactory,
+            TodoListIndexViewmodelFactory todoListIndexViewmodelFactory)
         {
             this.dbContext = dbContext;
             this.userStore = userStore;
+            _todoListDetailViewmodelFactory = todoListDetailViewmodelFactory;
+            _todoListIndexViewmodelFactory = todoListIndexViewmodelFactory;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var userId = User.Id();
             var todoLists = dbContext.RelevantTodoLists(userId);
-            var viewmodel = TodoListIndexViewmodelFactory.Create(todoLists);
+            var viewmodel = await _todoListIndexViewmodelFactory.Create(todoLists);
             return View(viewmodel);
         }
 
-        public IActionResult Detail(int todoListId)
+        public async Task<IActionResult> Detail(int todoListId)
         {
             var todoList = dbContext.SingleTodoList(todoListId);
-            var viewmodel = TodoListDetailViewmodelFactory.Create(todoList);
+            var viewmodel = await _todoListDetailViewmodelFactory.Create(todoList);
             return View(viewmodel);
         }
 

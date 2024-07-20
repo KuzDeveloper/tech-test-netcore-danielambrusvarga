@@ -7,11 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo", "Todo\Todo.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Tests", "Todo.Tests\Todo.Tests.csproj", "{1E5DC103-17C1-4E16-BF56-215356FF3972}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{775D9C03-98A9-479C-A836-E5E6921F4CF5}"
-	ProjectSection(SolutionItems) = preProject
-		001_Setup.md = 001_Setup.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

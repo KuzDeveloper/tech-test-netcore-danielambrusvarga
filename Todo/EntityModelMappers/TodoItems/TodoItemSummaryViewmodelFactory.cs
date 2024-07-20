@@ -1,13 +1,32 @@
-﻿using Todo.Data.Entities;
+﻿using System.Threading.Tasks;
+using Todo.Data.Entities;
 using Todo.Models.TodoItems;
 
 namespace Todo.EntityModelMappers.TodoItems
 {
-    public static class TodoItemSummaryViewmodelFactory
+    public class TodoItemSummaryViewmodelFactory
     {
-        public static TodoItemSummaryViewmodel Create(TodoItem ti)
+        private readonly UserSummaryViewmodelFactory _userSummaryViewmodelFactory;
+
+        public TodoItemSummaryViewmodelFactory(UserSummaryViewmodelFactory userSummaryViewmodelFactory)
         {
-            return new TodoItemSummaryViewmodel(ti.TodoItemId, ti.Title, ti.IsDone, UserSummaryViewmodelFactory.Create(ti.ResponsibleParty), ti.Importance);
+            _userSummaryViewmodelFactory = userSummaryViewmodelFactory;
+        }
+
+        public async Task<TodoItemSummaryViewmodel> Create(TodoItem ti)
+        {
+            UserSummaryViewmodel userSummaryViewmodel = null;
+
+            try
+            {
+                userSummaryViewmodel = await _userSummaryViewmodelFactory.Create(ti.ResponsibleParty);
+            }
+            catch
+            {
+                userSummaryViewmodel = new UserSummaryViewmodel(ti.ResponsibleParty.UserName, ti.ResponsibleParty.Email);
+            }
+
+            return new TodoItemSummaryViewmodel(ti.TodoItemId, ti.Title, ti.IsDone, userSummaryViewmodel, ti.Importance);
         }
     }
 }

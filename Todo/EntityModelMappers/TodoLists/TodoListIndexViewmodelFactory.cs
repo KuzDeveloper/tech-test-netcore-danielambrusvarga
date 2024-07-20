@@ -1,16 +1,29 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Todo.Data.Entities;
 using Todo.Models.TodoLists;
 
 namespace Todo.EntityModelMappers.TodoLists
 {
-    public static class TodoListIndexViewmodelFactory
+    public class TodoListIndexViewmodelFactory
     {
-        public static TodoListIndexViewmodel Create(IEnumerable<TodoList> todoLists)
+        private readonly TodoListSummaryViewmodelFactory _todoListSummaryViewmodelFactory;
+
+        public TodoListIndexViewmodelFactory(TodoListSummaryViewmodelFactory todoListSummaryViewmodelFactory)
         {
-            var lists = todoLists.Select(TodoListSummaryViewmodelFactory.Create).ToList();
-            return new TodoListIndexViewmodel(lists);
+            _todoListSummaryViewmodelFactory = todoListSummaryViewmodelFactory;
+        }
+
+        public async Task<TodoListIndexViewmodel> Create(IEnumerable<TodoList> todoLists)
+        {
+            List<TodoListSummaryViewmodel> todoListSummaryViewmodels = new List<TodoListSummaryViewmodel>();
+
+            foreach (var todoList in todoLists)
+            {
+                todoListSummaryViewmodels.Add(await _todoListSummaryViewmodelFactory.Create(todoList));
+            }
+
+            return new TodoListIndexViewmodel(todoListSummaryViewmodels);
         }
     }
 }
