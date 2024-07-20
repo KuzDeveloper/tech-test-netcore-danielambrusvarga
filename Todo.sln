@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2026
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo", "Todo\Todo.csproj", "{D521EE22-432D-46E6-9F12-3F980DB46413}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todo.Tests", "Todo.Tests\Todo.Tests.csproj", "{1E5DC103-17C1-4E16-BF56-215356FF3972}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todo.Tests", "Todo.Tests\Todo.Tests.csproj", "{1E5DC103-17C1-4E16-BF56-215356FF3972}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{775D9C03-98A9-479C-A836-E5E6921F4CF5}"
+	ProjectSection(SolutionItems) = preProject
+		001_Setup.md = 001_Setup.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
