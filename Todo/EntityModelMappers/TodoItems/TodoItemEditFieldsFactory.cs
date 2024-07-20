@@ -15,7 +15,8 @@ namespace Todo.EntityModelMappers.TodoItems
                 todoItem.Title,
                 todoItem.IsDone,
                 todoItem.ResponsiblePartyId,
-                todoItem.Importance);
+                todoItem.Importance,
+                todoItem.Rank);
         }
 
         public static void Update(TodoItemEditFields src, TodoItem dest)
@@ -24,6 +25,7 @@ namespace Todo.EntityModelMappers.TodoItems
             dest.IsDone = src.IsDone;
             dest.ResponsiblePartyId = src.ResponsiblePartyId;
             dest.Importance = src.Importance;
+            dest.Rank = src.Rank;
         }
     }
 }
