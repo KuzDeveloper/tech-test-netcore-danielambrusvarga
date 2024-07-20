@@ -1,6 +1,6 @@
 ﻿@using Todo.Controllers
 @using Todo.Data.Entities
-@using Todo.Services
+@using Todo.Helpers
 @model Todo.Models.TodoLists.TodoListDetailViewmodel
 
 @{
@@ -57,7 +57,7 @@
                     <small>
                         @item.ResponsibleParty.UserName
 
-                        <img src="https://www.gravatar.com/avatar/@Gravatar.GetHash(item.ResponsibleParty.Email)?s=30"/>
+                        <img src="https://www.gravatar.com/avatar/@MD5HashHelper.GetHash(item.ResponsibleParty.Email)?s=30"/>
 
                     </small>
                 </div>

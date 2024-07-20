@@ -8,6 +8,8 @@ using Todo.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Todo.DependencyInjection;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Todo
 {
@@ -45,6 +47,14 @@ namespace Todo
                     .RequireAuthenticatedUser()
                     .Build();
             });
+
+            services.AddCustomConfigurations(Configuration);
+            services.AddCustomProxies();
+            services.AddCustomProviders();
+            services.AddCustomServices();
+            services.AddCustomFactories();
+
+            services.AddSingleton<IMemoryCache, MemoryCache>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
